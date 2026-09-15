@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya — Web Designer for Small Businesses</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0e0e0e;
+    --white: #f7f6f2;
+    --mid: #888;
+    --accent: #2563ff;
+    --border: rgba(14,14,14,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--white);
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--mid);
+    font-size: 14px;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--black); }
+
+  .nav-cta {
+    background: var(--black);
+    color: var(--white) !important;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .nav-cta:hover { opacity: 0.8; color: var(--white) !important; }
+
+  /* HERO */
+  .hero {
+    padding: 100px 48px 80px;
+    max-width: 860px;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    letter-spacing: 0.2px;
+  }
+
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    margin-bottom: 28px;
+    max-width: 780px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--mid);
+  }
+
+  .hero p {
+    font-size: 18px;
+    color: #444;
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 44px;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--black);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.8; }
+
+  .btn-secondary {
+    color: var(--black);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    border-bottom: 1px solid var(--black);
+    padding-bottom: 2px;
+  }
+
+  /* SOCIAL PROOF BAR */
+  .proof-bar {
+    margin: 0 48px;
+    padding: 24px 32px;
+    background: #f0efe9;
+    border-radius: 12px;
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .proof-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .proof-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  .proof-label {
+    font-size: 13px;
+    color: var(--mid);
+    font-weight: 400;
+  }
+
+  .proof-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+  }
+
+  /* SECTION */
+  section {
+    padding: 80px 48px;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+    margin-bottom: 40px;
+  }
+
+  /* WORK */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .work-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .work-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+  }
+
+  .work-card a { text-decoration: none; }
+
+  .work-card-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+
+  .work-card-img.blue { background: linear-gradient(135deg, #1a1aff 0%, #6366f1 100%); }
+  .work-card-img.green { background: linear-gradient(135deg, #064e3b 0%, #10b981 100%); }
+  .work-card-img.orange { background: linear-gradient(135deg, #7c2d12 0%, #f97316 100%); }
+  .work-card-img.slate { background: linear-gradient(135deg, #1e293b 0%, #475569 100%); }
+
+  .work-card-body {
+    padding: 20px 24px;
+  }
+
+  .work-card-type {
+    font-size: 12px;
+    color: var(--mid);
+    margin-bottom: 6px;
+  }
+
+  .work-card-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .work-card-desc {
+    font-size: 14px;
+    color: #555;
+  }
+
+  /* HOW IT WORKS */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .step {
+    padding: 36px 32px;
+    border-right: 1px solid var(--border);
+  }
+
+  .step:last-child { border-right: none; }
+
+  .step-day {
+    font-size: 12px;
+    color: var(--mid);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .step h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
+
+  .step p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+  }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .pricing-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 28px;
+    background: #fff;
+    position: relative;
+  }
+
+  .pricing-card.featured {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+  }
+
+  .pricing-badge {
+    position: absolute;
+    top: -12px;
+    left: 28px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.3px;
+  }
+
+  .pricing-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mid);
+    margin-bottom: 8px;
+  }
+
+  .pricing-card.featured .pricing-name { color: #aaa; }
+
+  .pricing-price {
+    font-family: 'Instrument Serif', serif;
+    font-size: 42px;
+    letter-spacing: -1px;
+    margin-bottom: 4px;
+  }
+
+  .pricing-period {
+    font-size: 13px;
+    color: var(--mid);
+    margin-bottom: 24px;
+  }
+
+  .pricing-card.featured .pricing-period { color: #aaa; }
+
+  .pricing-features {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .pricing-features li {
+    font-size: 14px;
+    color: #444;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pricing-card.featured .pricing-features li {
+    color: #ccc;
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .pricing-features li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .pricing-card.featured .pricing-features li::before { color: #6ee7b7; }
+
+  .pricing-btn {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--black);
+    color: var(--black);
+    background: transparent;
+    transition: all 0.2s;
+  }
+
+  .pricing-btn:hover { background: var(--black); color: var(--white); }
+
+  .pricing-card.featured .pricing-btn {
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+  }
+
+  .pricing-card.featured .pricing-btn:hover { opacity: 0.85; }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .testimonial {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    background: #fff;
+  }
+
+  .testimonial-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    letter-spacing: -0.2px;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .testimonial-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .av1 { background: #2563ff; }
+  .av2 { background: #059669; }
+  .av3 { background: #d97706; }
+  .av4 { background: #7c3aed; }
+
+  .testimonial-name {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .testimonial-biz {
+    font-size: 12px;
+    color: var(--mid);
+  }
+
+  /* CTA */
+  .cta-section {
+    margin: 0 48px 80px;
+    background: var(--black);
+    color: var(--white);
+    border-radius: 16px;
+    padding: 72px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .cta-left h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    letter-spacing: -0.8px;
+    margin-bottom: 12px;
+    max-width: 440px;
+    line-height: 1.15;
+  }
+
+  .cta-left p {
+    font-size: 15px;
+    color: #aaa;
+    font-weight: 300;
+  }
+
+  .cta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 220px;
+  }
+
+  .cta-btn-white {
+    display: block;
+    background: var(--white);
+    color: var(--black);
+    text-align: center;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .cta-btn-white:hover { opacity: 0.88; }
+
+  .cta-btn-ghost {
+    display: block;
+    color: #aaa;
+    text-align: center;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: border-color 0.2s;
+  }
+
+  .cta-btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: var(--mid);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--mid);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover { color: var(--black); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 60px 24px 48px; }
+    .proof-bar { margin: 0 24px; gap: 24px; }
+    section { padding: 60px 24px; }
+    .work-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .step { border-right: none; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .testimonials { grid-template-columns: 1fr; }
+    .cta-section { margin: 0 24px 60px; padding: 48px 32px; }
+    footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Aditya</div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="https://wa.me/919798724090" class="nav-cta">Get a free mockup</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Available for new projects</div>
+  <h1>Your business deserves to be found <em>online.</em></h1>
+  <p>I build clean, fast websites for small businesses — restaurants, salons, gyms, contractors. Done in 3–5 days, no jargon, no hassle. Arabic-friendly sites available.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Get your free mockup</a>
+    <a href="#work" class="btn-secondary">See my work</a>
+  </div>
+</section>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-item">
+    <span class="proof-num">3–5</span>
+    <span class="proof-label">Days turnaround</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <span class="proof-num">100%</span>
+    <span class="proof-label">Mobile-first builds</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <span class="proof-num">🌍</span>
+    <span class="proof-label">Arabic-friendly sites available</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <span class="proof-num">Free</span>
+    <span class="proof-label">Mockup, no commitment</span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section id="work">
+  <p class="section-label">Selected work</p>
+  <div class="work-grid">
+    <div class="work-card">
+      <a href="https://pocket-falafel.vercel.app/" target="_blank">
+        <div class="work-card-img" style="background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%);">Pocket Falafel</div>
+      </a>
+      <div class="work-card-body">
+        <div class="work-card-type">Restaurant · Live site ↗</div>
+        <div class="work-card-name">Pocket Falafel</div>
+        <div class="work-card-desc">Full restaurant website with menu, branding, and online presence</div>
+      </div>
+    </div>
+    <div class="work-card">
+      <a href="https://trendy-guys-barber.vercel.app/" target="_blank">
+        <div class="work-card-img" style="background: linear-gradient(135deg, #1e3a5f 0%, #3b82f6 100%);">Trendy Guys Barber</div>
+      </a>
+      <div class="work-card-body">
+        <div class="work-card-type">Barbershop · Live site ↗</div>
+        <div class="work-card-name">Trendy Guys Barber</div>
+        <div class="work-card-desc">Modern barbershop site with services, gallery, and booking CTA</div>
+      </div>
+    </div>
+    <div class="work-card">
+      <a href="https://nuu-william-nails.vercel.app/" target="_blank">
+        <div class="work-card-img" style="background: linear-gradient(135deg, #831843 0%, #ec4899 100%);">Nuu William Nails</div>
+      </a>
+      <div class="work-card-body">
+        <div class="work-card-type">Nail Salon · Live site ↗</div>
+        <div class="work-card-name">Nuu William Nails</div>
+        <div class="work-card-desc">Elegant nail salon site with services, pricing, and contact</div>
+      </div>
+    </div>
+    <div class="work-card">
+      <a href="https://unnati-enterprises.vercel.app/" target="_blank">
+        <div class="work-card-img" style="background: linear-gradient(135deg, #14532d 0%, #22c55e 100%);">Unnati Enterprises</div>
+      </a>
+      <div class="work-card-body">
+        <div class="work-card-type">Business · Live site ↗</div>
+        <div class="work-card-name">Unnati Enterprises</div>
+        <div class="work-card-desc">Professional business website with services and lead capture</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" style="background: #f0efe9; margin: 0 48px; border-radius: 16px; padding: 60px 48px;">
+  <p class="section-label">How it works</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-day">Day 1</div>
+      <h3>We talk</h3>
+      <p>A quick 15-minute call or WhatsApp chat. I learn about your business, what you need, and what you like.</p>
+    </div>
+    <div class="step">
+      <div class="step-day">Day 2–3</div>
+      <h3>I build</h3>
+      <p>I design and build your site. You get a preview link to review before anything goes live.</p>
+    </div>
+    <div class="step">
+      <div class="step-day">Day 4–5</div>
+      <h3>You're live</h3>
+      <p>Revisions, your domain, and launch. You own everything. I'm available if you ever need changes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <p class="section-label">Pricing</p>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-name">Starter</div>
+      <div class="pricing-price">$299</div>
+      <div class="pricing-period">one-time</div>
+      <ul class="pricing-features">
+        <li>1-page landing site</li>
+        <li>Mobile responsive</li>
+        <li>Contact form</li>
+        <li>Google Maps embed</li>
+        <li>Delivered in 3 days</li>
+      </ul>
+      <a href="#contact" class="pricing-btn">Get started</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Most popular</div>
+      <div class="pricing-name">Standard</div>
+      <div class="pricing-price">$999</div>
+      <div class="pricing-period">one-time</div>
+      <ul class="pricing-features">
+        <li>Up to 5 pages</li>
+        <li>Mobile responsive</li>
+        <li>Booking / contact form</li>
+        <li>Basic SEO setup</li>
+        <li>Photo gallery</li>
+        <li>Delivered in 5 days</li>
+      </ul>
+      <a href="#contact" class="pricing-btn">Get started</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-name">Growth</div>
+      <div class="pricing-price">$199</div>
+      <div class="pricing-period">per month</div>
+      <ul class="pricing-features">
+        <li>Everything in Standard</li>
+        <li>Monthly updates</li>
+        <li>SEO monitoring</li>
+        <li>Priority support</li>
+        <li>Google Analytics</li>
+      </ul>
+      <a href="#contact" class="pricing-btn">Get started</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <p class="section-label">What clients say</p>
+  <div class="testimonials">
+    <div class="testimonial">
+      <div class="testimonial-text">"Aditya built our site in under a week. Customers now find us on Google and call directly — wish we'd done this sooner."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar av1">✂️</div>
+        <div>
+          <div class="testimonial-name">Trendy Guys Barber</div>
+          <div class="testimonial-biz">Peckham, London</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-text">"Fast, clean, and exactly what we needed. The whole process was done over WhatsApp — simple and no hassle at all."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar av2">🍔</div>
+        <div>
+          <div class="testimonial-name">Pocket Falafel</div>
+          <div class="testimonial-biz">Hackney, London</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-text">"Our new site looks more professional than anything I've seen from agencies that charge 5x more. Very happy."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar av3">💅</div>
+        <div>
+          <div class="testimonial-name">Nuu William Nails</div>
+          <div class="testimonial-biz">Lee, London</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-text">"Professional, honest, and delivered on time. Aditya understood exactly what a small business needs — no fluff."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar av4">🏢</div>
+        <div>
+          <div class="testimonial-name">Unnati Enterprises</div>
+          <div class="testimonial-biz">India</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div id="contact" class="cta-section">
+  <div class="cta-left">
+    <h2>See what your site could look like — free.</h2>
+    <p>Send me your business name and I'll build a mockup. No commitment, no credit card.</p>
+  </div>
+  <div class="cta-right">
+    <a href="https://wa.me/919798724090" class="cta-btn-white">WhatsApp me now</a>
+    <a href="mailto:sns.aditya17@gmail.com" class="cta-btn-ghost">Send an email instead</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Aditya. All rights reserved.</p>
+  <ul class="footer-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="https://wa.me/919798724090">WhatsApp</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
